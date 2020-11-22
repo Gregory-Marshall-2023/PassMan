@@ -1,0 +1,44 @@
+plugins {
+    id 'application'
+    id 'java'
+    id 'com.diffplug.gradle.spotless' version '3.27.1'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+group 'edu.wpi.gtmarshall'
+version '0.0.0'
+
+sourceCompatibility = '13'
+targetCompatibility = '13'
+mainClassName = 'edu.wpi.gtmarshall.Main'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+
+
+javafx {
+    version = "13"
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+
+jar {
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+compileJava.dependsOn 'spotlessApply'
+
+spotless {
+    java {
+        googleJavaFormat()
+    }
+}
