@@ -18,7 +18,6 @@ public class Login extends Page {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     EncryptionAlgorithm aes = new AES();
-    aes.setSalt("salty");
     aes.select();
     EncryptionAlgorithm.setUser(null);
   }

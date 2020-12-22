@@ -56,7 +56,7 @@ public class AES extends EncryptionAlgorithm {
   }
 
   @Override
-  public void setSalt(String str) {
+  void setSalt(String str) {
     salt = str;
   }
 }
