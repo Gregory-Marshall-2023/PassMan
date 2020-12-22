@@ -28,7 +28,7 @@ public class User {
 
   public File getPath() {
     String fileName = "";
-    fileName = Integer.toHexString(Integer.hashCode(userName.hashCode()));
+    fileName = getSalt();
     fileName += ".info";
     File dirFile = new File(dir);
     if (!dirFile.exists()) dirFile.mkdirs();
@@ -38,5 +38,13 @@ public class User {
   public boolean hasFile() {
     File f = getPath();
     return f.exists();
+  }
+
+  // to be replaced with a smarter algorithm to create similarly large numbers with modulo
+  public String getSalt() {
+    double d = (double) userName.hashCode();
+    while (d < 1e9) d *= Math.PI;
+    while (d > 1e11) d /= Math.PI;
+    return Double.toHexString(d);
   }
 }
