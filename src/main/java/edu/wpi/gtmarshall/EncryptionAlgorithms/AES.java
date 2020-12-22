@@ -1,5 +1,6 @@
 package edu.wpi.gtmarshall.EncryptionAlgorithms;
 
+import java.nio.charset.StandardCharsets;
 import java.security.spec.KeySpec;
 import java.util.Base64;
 import javax.crypto.Cipher;
@@ -14,7 +15,7 @@ public class AES extends EncryptionAlgorithm {
   private static String salt = " ";
 
   @Override
-  public String encrypt(String plaintext, String key) {
+  String encrypt(String plaintext, String key) {
     try {
       byte[] iv = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
       IvParameterSpec ivspec = new IvParameterSpec(iv);
@@ -26,7 +27,8 @@ public class AES extends EncryptionAlgorithm {
 
       Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
       cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivspec);
-      return Base64.getEncoder().encodeToString(cipher.doFinal(plaintext.getBytes("UTF-8")));
+      return Base64.getEncoder()
+          .encodeToString(cipher.doFinal(plaintext.getBytes(StandardCharsets.UTF_8)));
     } catch (Exception e) {
       System.out.println("Error while encrypting: " + e.toString());
     }
@@ -34,7 +36,7 @@ public class AES extends EncryptionAlgorithm {
   }
 
   @Override
-  public String decrypt(String ciphertext, String key) {
+  String decrypt(String ciphertext, String key) {
     try {
       byte[] iv = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
       IvParameterSpec ivspec = new IvParameterSpec(iv);

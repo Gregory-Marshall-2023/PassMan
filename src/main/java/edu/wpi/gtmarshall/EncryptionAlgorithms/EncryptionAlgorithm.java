@@ -1,9 +1,41 @@
 package edu.wpi.gtmarshall.EncryptionAlgorithms;
 
-public abstract class EncryptionAlgorithm {
-  public abstract String encrypt(String plaintext, String key);
+import edu.wpi.gtmarshall.FileManagement.User;
 
-  public abstract String decrypt(String ciphertext, String key);
+public abstract class EncryptionAlgorithm {
+  private static EncryptionAlgorithm selected;
+  private static User user;
+
+  public static final String encrypt(String str) {
+    return selected.encrypt(str, user.getPassWord());
+  }
+
+  public static User getUser() {
+    return user;
+  }
+
+  abstract String encrypt(String plaintext, String key);
+
+  abstract String decrypt(String ciphertext, String key);
+
+  public static final String decrypt(String str) {
+    return selected.decrypt(str, user.getPassWord());
+  }
 
   public abstract void setSalt(String str);
+
+  public static void setUser(User user) {
+    if (selected == null) return;
+    System.out.println("User Selected");
+    selected.user = user;
+  }
+
+  public static EncryptionAlgorithm getSelected() {
+    return selected;
+  }
+
+  public final void select() {
+    System.out.println("Algorithm Selected");
+    EncryptionAlgorithm.selected = this;
+  }
 }

@@ -1,31 +1,32 @@
 package edu.wpi.gtmarshall.FileManagement;
 
+import edu.wpi.gtmarshall.EncryptionAlgorithms.EncryptionAlgorithm;
+import edu.wpi.gtmarshall.pages.Entry;
 import java.io.FileWriter;
-import java.nio.charset.StandardCharsets;
+import java.util.LinkedList;
 
 public class DataSaver {
-  public void write(String text) {
-    String binText = toHex(text);
-  }
-
-  private String toHex(String str) {
-    String ret = "";
-    byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
-    for (byte b : bytes) {
-      ret += Integer.toHexString(b);
-    }
-    return ret;
-  }
-
-  public void save(String string) {
+  public static void save(LinkedList<Entry> entries) {
+    System.out.println("SAVING===========================================");
     try {
-      FileWriter writer = new FileWriter("EncryptedData.file");
-      writer.write(toHex(string));
-      System.out.println("Data Saved");
+      String path = EncryptionAlgorithm.getUser().getPath();
+      FileWriter writer = new FileWriter(path);
+      String str = EncryptionAlgorithm.getUser().getIdentifier() + "\n";
+      ;
+      System.out.println(entries.toString());
+      for (Entry e : entries) {
+        str = str + e.toString() + "\n";
+      }
+      System.out.println("UNENCRYPTED");
+      System.out.println(str);
+      str = EncryptionAlgorithm.encrypt(str);
+      System.out.println("ENCRYPTED");
+      System.out.println(str);
+      writer.write(str);
       writer.flush();
       writer.close();
+      System.out.println("Data Saved");
     } catch (Exception e) {
-      System.out.println("Save Failed");
       e.printStackTrace();
     }
   }
