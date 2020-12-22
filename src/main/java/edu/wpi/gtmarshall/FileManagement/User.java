@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class User {
   private String userName, passWord;
+  private static String dir = "folder";
 
   public User(String userName, String passWord) {
     this.userName = userName;
@@ -25,15 +26,17 @@ public class User {
     return ret;
   }
 
-  public String getPath() {
-    String ret = ""; // ".\\folder\\";
-    ret += Integer.toHexString(Integer.hashCode(userName.hashCode()));
-    ret += ".info";
-    return ret;
+  public File getPath() {
+    String fileName = "";
+    fileName = Integer.toHexString(Integer.hashCode(userName.hashCode()));
+    fileName += ".info";
+    File dirFile = new File(dir);
+    if (!dirFile.exists()) dirFile.mkdirs();
+    return new File(dir, fileName);
   }
 
   public boolean hasFile() {
-    File f = new File(getPath());
+    File f = getPath();
     return f.exists();
   }
 }

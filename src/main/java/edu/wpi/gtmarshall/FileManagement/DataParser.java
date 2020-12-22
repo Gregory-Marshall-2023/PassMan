@@ -9,8 +9,7 @@ public class DataParser {
   public static String load() {
     String str = "";
     try {
-      String path = EncryptionAlgorithm.getUser().getPath();
-      File f = new File(path);
+      File f = EncryptionAlgorithm.getUser().getPath();
       if (!f.exists()) {
         f.createNewFile();
         return "";

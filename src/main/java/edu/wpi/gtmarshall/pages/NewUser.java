@@ -47,7 +47,7 @@ public class NewUser extends Popup {
       close();
       return;
     }
-    File f = new File(user.getPath());
+    File f = user.getPath();
     try {
       f.createNewFile();
       EncryptionAlgorithm.setUser(user);
