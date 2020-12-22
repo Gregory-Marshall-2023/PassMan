@@ -31,8 +31,7 @@ public class Viewer extends Page {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    Random r = new Random();
-    entries = new LinkedList<Entry>();
+    entries = new LinkedList<>();
     LinkedList<Password> passwords = new LinkedList<>();
     Stream<String> entryStrings = DataParser.getEntries();
     if (entryStrings == null) {
@@ -63,17 +62,16 @@ public class Viewer extends Page {
     addEntries(passwords, true);
   }
 
-  private void addEntries(LinkedList<Password> passwords, boolean allowThreading) {
+  private void addEntries(LinkedList<Password> passwords, @SuppressWarnings("SameParameterValue") boolean allowThreading) {
     if (allowThreading && passwords.size() > 25) addEntriesThreaded(passwords);
     else {
-      passwords.stream().forEach(this::addEntry);
+      passwords.forEach(this::addEntry);
     }
   }
 
   private void addEntriesThreaded(LinkedList<Password> passwords) {
-    Random random = new Random();
-    Task task =
-        new Task<Void>() {
+    Task<Void> task =
+        new Task<>() {
           Password p;
 
           @Override
@@ -81,7 +79,7 @@ public class Viewer extends Page {
             p = passwords.remove();
             addEntry(p);
             try {
-              Thread.sleep(Math.min((long) Math.floor(passwords.size() / 100), 20), 0);
+              Thread.sleep(Math.min((long) Math.floor(passwords.size() / 100f), 20), 0);
             } catch (InterruptedException e) {
               e.printStackTrace();
             }
@@ -109,7 +107,7 @@ public class Viewer extends Page {
 
   @Override
   protected Pair<Double, Double> getDims() {
-    return new Pair<Double, Double>(1050d, 700d);
+    return new Pair<>(1050d, 700d);
   }
 
   @FXML

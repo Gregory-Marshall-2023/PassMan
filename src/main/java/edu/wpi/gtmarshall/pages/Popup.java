@@ -1,5 +1,6 @@
 package edu.wpi.gtmarshall.pages;
 
+import javafx.fxml.FXML;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -10,6 +11,7 @@ public abstract class Popup extends Page {
     this.stage = stage;
   }
 
+  @FXML
   final void onClose(WindowEvent windowEvent) {
     onClose();
   }

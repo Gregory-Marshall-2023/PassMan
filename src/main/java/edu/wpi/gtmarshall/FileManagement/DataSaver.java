@@ -8,22 +8,16 @@ import java.util.LinkedList;
 
 public class DataSaver {
   public static void save(LinkedList<Entry> entries) {
-    System.out.println("SAVING===========================================");
     try {
       File f = EncryptionAlgorithm.getUser().getPath();
       FileWriter writer = new FileWriter(f);
-      String str = EncryptionAlgorithm.getUser().getIdentifier() + "\n";
-      ;
+      StringBuilder str = new StringBuilder(EncryptionAlgorithm.getUser().getIdentifier() + "\n");
       System.out.println(entries.toString());
       for (Entry e : entries) {
-        str = str + e.toString() + "\n";
+        str.append(e.toString()).append("\n");
       }
-      System.out.println("UNENCRYPTED");
-      System.out.println(str);
-      str = EncryptionAlgorithm.encrypt(str);
-      System.out.println("ENCRYPTED");
-      System.out.println(str);
-      writer.write(str);
+      str = new StringBuilder(EncryptionAlgorithm.encrypt(str.toString()));
+      writer.write(str.toString());
       writer.flush();
       writer.close();
       System.out.println("Data Saved");
