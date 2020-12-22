@@ -17,16 +17,7 @@ public class AES extends EncryptionAlgorithm {
   @Override
   String encrypt(String plaintext, String key) {
     try {
-      byte[] iv = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-      IvParameterSpec ivspec = new IvParameterSpec(iv);
-
-      SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-      KeySpec spec = new PBEKeySpec(key.toCharArray(), salt.getBytes(), 65536, 256);
-      SecretKey tmp = factory.generateSecret(spec);
-      SecretKeySpec secretKey = new SecretKeySpec(tmp.getEncoded(), "AES");
-
-      Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-      cipher.init(Cipher.ENCRYPT_MODE, secretKey, ivspec);
+      Cipher cipher = genCipher(key, Cipher.ENCRYPT_MODE);
       return Base64.getEncoder()
           .encodeToString(cipher.doFinal(plaintext.getBytes(StandardCharsets.UTF_8)));
     } catch (Exception e) {
@@ -38,16 +29,7 @@ public class AES extends EncryptionAlgorithm {
   @Override
   String decrypt(String ciphertext, String key) {
     try {
-      byte[] iv = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-      IvParameterSpec ivspec = new IvParameterSpec(iv);
-
-      SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
-      KeySpec spec = new PBEKeySpec(key.toCharArray(), salt.getBytes(), 65536, 256);
-      SecretKey tmp = factory.generateSecret(spec);
-      SecretKeySpec secretKey = new SecretKeySpec(tmp.getEncoded(), "AES");
-
-      Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
-      cipher.init(Cipher.DECRYPT_MODE, secretKey, ivspec);
+      Cipher cipher = genCipher(key, Cipher.DECRYPT_MODE);
       return new String(cipher.doFinal(Base64.getDecoder().decode(ciphertext)));
     } catch (Exception e) {
       System.out.println("Error while decrypting: " + e.toString());
@@ -56,7 +38,21 @@ public class AES extends EncryptionAlgorithm {
   }
 
   @Override
-  public void setSalt(String str) {
+  void setSalt(String str) {
     salt = str;
+  }
+
+  private Cipher genCipher(String key, int mode) throws Exception {
+    byte[] iv = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+    IvParameterSpec ivspec = new IvParameterSpec(iv);
+
+    SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA256");
+    KeySpec spec = new PBEKeySpec(key.toCharArray(), salt.getBytes(), 65536, 256);
+    SecretKey tmp = factory.generateSecret(spec);
+    SecretKeySpec secretKey = new SecretKeySpec(tmp.getEncoded(), "AES");
+
+    Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5PADDING");
+    cipher.init(mode, secretKey, ivspec);
+    return cipher;
   }
 }

@@ -2,27 +2,22 @@ package edu.wpi.gtmarshall.FileManagement;
 
 import edu.wpi.gtmarshall.EncryptionAlgorithms.EncryptionAlgorithm;
 import edu.wpi.gtmarshall.pages.Entry;
+import java.io.File;
 import java.io.FileWriter;
 import java.util.LinkedList;
 
 public class DataSaver {
   public static void save(LinkedList<Entry> entries) {
-    System.out.println("SAVING===========================================");
     try {
-      String path = EncryptionAlgorithm.getUser().getPath();
-      FileWriter writer = new FileWriter(path);
-      String str = EncryptionAlgorithm.getUser().getIdentifier() + "\n";
-      ;
+      File f = EncryptionAlgorithm.getUser().getPath();
+      FileWriter writer = new FileWriter(f);
+      StringBuilder str = new StringBuilder(EncryptionAlgorithm.getUser().getIdentifier() + "\n");
       System.out.println(entries.toString());
       for (Entry e : entries) {
-        str = str + e.toString() + "\n";
+        str.append(e.toString()).append("\n");
       }
-      System.out.println("UNENCRYPTED");
-      System.out.println(str);
-      str = EncryptionAlgorithm.encrypt(str);
-      System.out.println("ENCRYPTED");
-      System.out.println(str);
-      writer.write(str);
+      str = new StringBuilder(EncryptionAlgorithm.encrypt(str.toString()));
+      writer.write(str.toString());
       writer.flush();
       writer.close();
       System.out.println("Data Saved");

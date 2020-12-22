@@ -22,12 +22,13 @@ public abstract class EncryptionAlgorithm {
     return selected.decrypt(str, user.getPassWord());
   }
 
-  public abstract void setSalt(String str);
+  abstract void setSalt(String str);
 
   public static void setUser(User user) {
     if (selected == null) return;
     System.out.println("User Selected");
     selected.user = user;
+    if (user != null) selected.setSalt(user.getSalt());
   }
 
   public static EncryptionAlgorithm getSelected() {

@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class User {
   private String userName, passWord;
+  private static String dir = "folder";
 
   public User(String userName, String passWord) {
     this.userName = userName;
@@ -25,15 +26,25 @@ public class User {
     return ret;
   }
 
-  public String getPath() {
-    String ret = ""; // ".\\folder\\";
-    ret += Integer.toHexString(Integer.hashCode(userName.hashCode()));
-    ret += ".info";
-    return ret;
+  public File getPath() {
+    String fileName = "";
+    fileName = getSalt();
+    fileName += ".info";
+    File dirFile = new File(dir);
+    if (!dirFile.exists()) dirFile.mkdirs();
+    return new File(dir, fileName);
   }
 
   public boolean hasFile() {
-    File f = new File(getPath());
+    File f = getPath();
     return f.exists();
+  }
+
+  // to be replaced with a smarter algorithm to create similarly large numbers with modulo
+  public String getSalt() {
+    double d = (double) userName.hashCode();
+    while (d < 1e9) d *= Math.PI;
+    while (d > 1e11) d /= Math.PI;
+    return Double.toHexString(d);
   }
 }

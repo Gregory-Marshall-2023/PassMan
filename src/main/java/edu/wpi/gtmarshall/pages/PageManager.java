@@ -44,7 +44,7 @@ public class PageManager {
     return null;
   }
 
-  public void initialize(Stage primaryStage, Page startingPage) throws IOException {
+  public void initialize(Stage primaryStage, Page startingPage) {
     stage = primaryStage;
     scene = new Scene(new AnchorPane());
     root = new Base();
