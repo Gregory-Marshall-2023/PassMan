@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="80.0" maxWidth="150.0" prefHeight="80.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="root" maxHeight="80.0" maxWidth="150.0" prefHeight="80.0" prefWidth="150.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <RadioButton fx:id="selector" layoutX="15.0" layoutY="30.0" mnemonicParsing="false" onAction="#select" selected="true" stylesheets="@../styleSheets/RadioButton.css" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="30.0" />
       <AnchorPane layoutX="35.0" prefHeight="80.0" prefWidth="101.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

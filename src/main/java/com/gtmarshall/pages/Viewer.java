@@ -3,7 +3,7 @@ package com.gtmarshall.pages;
 import com.gtmarshall.FileManagement.DataParser;
 import com.gtmarshall.FileManagement.DataSaver;
 import com.gtmarshall.FileManagement.Password;
-import java.awt.*;
+import com.gtmarshall.Main;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Stream;
@@ -14,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.util.Pair;
 
@@ -22,6 +24,7 @@ public class Viewer extends Page {
   @FXML Label appName;
   @FXML TextField userName, password;
   @FXML TextArea description;
+  @FXML ImageView descriptionEye, passwordEye;
   private Entry selected;
   private LinkedList<Entry> entries;
 
@@ -39,6 +42,27 @@ public class Viewer extends Page {
       PageManager.getInstance().show(new Login());
       return;
     }
+    password
+        .editableProperty()
+        .addListener(
+            (observable, old, newVal) -> {
+              if (newVal == true)
+                passwordEye.setImage(
+                    new Image(Main.class.getResourceAsStream("images/eye-off.png")));
+              else
+                passwordEye.setImage(new Image(Main.class.getResourceAsStream("images/eye.png")));
+            });
+    description
+        .editableProperty()
+        .addListener(
+            (observable, old, newVal) -> {
+              if (newVal == true)
+                descriptionEye.setImage(
+                    new Image(Main.class.getResourceAsStream("images/eye-off.png")));
+              else
+                descriptionEye.setImage(
+                    new Image(Main.class.getResourceAsStream("images/eye.png")));
+            });
     entryStrings.forEach(string -> passwords.add(Password.parse(string)));
     addEntries(passwords);
   }
@@ -140,5 +164,24 @@ public class Viewer extends Page {
   @FXML
   void copyPass(ActionEvent event) {
     selected.getPassword().copyPassword();
+  }
+
+  @FXML
+  void delete(ActionEvent event) {
+    int index = entries.indexOf(selected) - 1;
+    entries.remove(selected);
+    entryList.getChildren().remove(selected.getRoot());
+    if (index >= 0) select(entries.get(index));
+    else {
+      appName.textProperty().unbind();
+      password.textProperty().unbind();
+      userName.textProperty().unbind();
+      description.textProperty().unbind();
+      appName.setText("AppName");
+      password.setText("");
+      userName.setText("");
+      description.setText("");
+    }
+    DataSaver.save(entries);
   }
 }

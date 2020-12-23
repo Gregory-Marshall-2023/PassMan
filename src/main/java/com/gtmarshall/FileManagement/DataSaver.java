@@ -12,7 +12,6 @@ public class DataSaver {
       File f = EncryptionAlgorithm.getUser().getPath();
       FileWriter writer = new FileWriter(f);
       StringBuilder str = new StringBuilder(EncryptionAlgorithm.getUser().getIdentifier() + "\n");
-      System.out.println(entries.toString());
       for (Entry e : entries) {
         str.append(e.toString()).append("\n");
       }

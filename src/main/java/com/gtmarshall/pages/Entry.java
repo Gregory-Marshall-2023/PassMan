@@ -7,14 +7,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.layout.AnchorPane;
 
 public class Entry extends Page {
+  @FXML private AnchorPane root;
   @FXML private Label userName, appName;
   @FXML private RadioButton selector;
   private Password password;
   private Viewer parent;
 
   private Entry() {}
+
+  AnchorPane getRoot() {
+    return root;
+  }
 
   protected Password getPassword() {
     return password;
