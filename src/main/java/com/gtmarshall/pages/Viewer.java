@@ -3,6 +3,7 @@ package com.gtmarshall.pages;
 import com.gtmarshall.FileManagement.DataParser;
 import com.gtmarshall.FileManagement.DataSaver;
 import com.gtmarshall.FileManagement.Password;
+import java.awt.*;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Stream;
@@ -51,6 +52,7 @@ public class Viewer extends Page {
     if (selected != null) selected.deselect();
     selected = e;
     Password p = e.getPassword();
+    p.copyUserName();
     p.bindUserName(userName);
     p.bindAppName(appName);
     p.bindPassString(password);
@@ -128,5 +130,15 @@ public class Viewer extends Page {
   void newPassword(ActionEvent event) {
     PageManager.getInstance().showPopup(new NewEntry(this));
     DataSaver.save(entries);
+  }
+
+  @FXML
+  void copyUserName(ActionEvent event) {
+    selected.getPassword().copyUserName();
+  }
+
+  @FXML
+  void copyPass(ActionEvent event) {
+    selected.getPassword().copyPassword();
   }
 }

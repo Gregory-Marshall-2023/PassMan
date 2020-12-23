@@ -1,7 +1,7 @@
 package com.gtmarshall.FileManagement;
 
+import java.awt.*;
 import java.io.File;
-import java.util.Random;
 
 public class User {
   private String userName, passWord;

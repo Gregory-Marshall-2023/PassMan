@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -75,7 +76,8 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="userName" minWidth="150.0" />
+                              <TextField fx:id="userName" minWidth="150.0" prefWidth="200.0" />
+                              <Button minWidth="25.0" mnemonicParsing="false" onAction="#copyUserName" prefWidth="25.0" text="C" />
                            </children>
                            <padding>
                               <Insets top="8.0" />
@@ -88,24 +90,28 @@
                                     <Font size="13.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="password" minWidth="150.0" />
-                              <Button minWidth="25.0" mnemonicParsing="false" onAction="#togglePass" prefWidth="25.0" text="e" />
-                              <Label prefWidth="100000.0" />
-                              <Button mnemonicParsing="false" onAction="#toggleDesc" prefWidth="25.0" text="e">
-                                 <HBox.margin>
-                                    <Insets right="10.0" />
-                                 </HBox.margin>
-                              </Button>
+                              <StackPane alignment="CENTER_RIGHT">
+                                 <children>
+                                    <TextField fx:id="password" minWidth="150.0" prefWidth="200.0" />
+                                    <Button minWidth="25.0" mnemonicParsing="false" onAction="#togglePass" prefWidth="25.0" text="e" />
+                                 </children>
+                              </StackPane>
+                              <Button minWidth="25.0" mnemonicParsing="false" onAction="#copyPass" prefWidth="25.0" text="C" />
                            </children>
                            <padding>
                               <Insets bottom="8.0" top="2.0" />
                            </padding>
                         </HBox>
-                        <TextArea fx:id="description" prefHeight="520.0" prefWidth="825.0" wrapText="true">
-                           <VBox.margin>
-                              <Insets bottom="8.0" left="8.0" />
-                           </VBox.margin>
-                        </TextArea>
+                        <StackPane alignment="TOP_RIGHT">
+                           <children>
+                              <TextArea fx:id="description" prefHeight="520.0" prefWidth="825.0" wrapText="true" />
+                              <Button mnemonicParsing="false" onAction="#toggleDesc" prefWidth="25.0" text="e">
+                                 <StackPane.margin>
+                                    <Insets right="10.0" top="10.0" />
+                                 </StackPane.margin>
+                              </Button>
+                           </children>
+                        </StackPane>
                      </children>
                   </VBox>
                </children>

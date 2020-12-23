@@ -1,5 +1,7 @@
 package com.gtmarshall.FileManagement;
 
+import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.util.Random;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -128,5 +130,18 @@ public class Password {
         + passString.get()
         + ":"
         + description.get();
+  }
+
+  public void copyUserName() {
+    copyString(userName.get());
+  }
+
+  public void copyPassword() {
+    copyString(passString.actualString);
+  }
+
+  private void copyString(String str) {
+    StringSelection selection = new StringSelection(str);
+    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(selection, selection);
   }
 }
