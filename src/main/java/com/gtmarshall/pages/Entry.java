@@ -63,6 +63,14 @@ public class Entry extends Page {
     password.unbindDescription(parent.description);
   }
 
+  private static final float thresh = .5f;
+
+  boolean matches(String str) {
+    String aN = appName.getText();
+    String uN = userName.getText();
+    return aN.contains(str) || uN.contains(str);
+  }
+
   public void togglePass() {
     password.togglePass();
   }

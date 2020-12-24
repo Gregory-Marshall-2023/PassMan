@@ -22,7 +22,7 @@ import javafx.util.Pair;
 public class Viewer extends Page {
   @FXML VBox entryList;
   @FXML Label appName;
-  @FXML TextField userName, password;
+  @FXML TextField userName, password, searchBar;
   @FXML TextArea description;
   @FXML ImageView descriptionEye, passwordEye;
   private Entry selected;
@@ -42,6 +42,7 @@ public class Viewer extends Page {
       PageManager.getInstance().show(new Login());
       return;
     }
+    searchBar.textProperty().addListener(observable -> search());
     password
         .editableProperty()
         .addListener(
@@ -164,6 +165,18 @@ public class Viewer extends Page {
   @FXML
   void copyPass(ActionEvent event) {
     selected.getPassword().copyPassword();
+  }
+
+  void search() {
+    entryList.getChildren().clear();
+    if (searchBar.getText().isBlank())
+      entries.forEach(entry -> entryList.getChildren().add(entry.getRoot()));
+    else
+      entries.forEach(
+          entry -> {
+            if (entry.matches(searchBar.getText())) entryList.getChildren().add(entry.getRoot());
+          });
+    System.out.println("Searched");
   }
 
   @FXML
