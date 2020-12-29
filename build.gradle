@@ -6,18 +6,16 @@ plugins {
 }
 
 group 'edu.wpi.gtmarshall'
-version '0.0.0'
+version 'a.0.1'
 
 sourceCompatibility = '13'
 targetCompatibility = '13'
-mainClassName = 'edu.wpi.gtmarshall.Main'
+mainClassName = 'com.gtmarshall.Main'
 
 repositories {
     mavenCentral()
     jcenter()
 }
-
-
 
 javafx {
     version = "13"
