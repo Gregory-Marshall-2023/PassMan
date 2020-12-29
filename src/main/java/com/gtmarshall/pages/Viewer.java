@@ -117,8 +117,7 @@ public class Viewer extends Page {
           }
 
           @Override
-          protected void failed() {
-          }
+          protected void failed() {}
         };
     Platform.runLater(task);
   }
@@ -163,6 +162,7 @@ public class Viewer extends Page {
 
   @FXML
   void OpenGenerateWindow(ActionEvent event) {
+    if(selected!=null)
     PageManager.getInstance().showPopup(new PasswordGen(selected.getPassword()));
   }
 
