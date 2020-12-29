@@ -118,7 +118,6 @@ public class Viewer extends Page {
 
           @Override
           protected void failed() {
-            System.out.println("FAILED TO ADD ENTRY");
           }
         };
     Platform.runLater(task);
@@ -163,6 +162,11 @@ public class Viewer extends Page {
   }
 
   @FXML
+  void OpenGenerateWindow(ActionEvent event) {
+    PageManager.getInstance().showPopup(new PasswordGen(selected.getPassword()));
+  }
+
+  @FXML
   void copyPass(ActionEvent event) {
     selected.getPassword().copyPassword();
   }
@@ -176,7 +180,6 @@ public class Viewer extends Page {
           entry -> {
             if (entry.matches(searchBar.getText())) entryList.getChildren().add(entry.getRoot());
           });
-    System.out.println("Searched");
   }
 
   @FXML

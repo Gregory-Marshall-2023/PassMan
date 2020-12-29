@@ -34,13 +34,14 @@
                   <TextField fx:id="userName" prefHeight="25.0" prefWidth="160.0" promptText="UserName" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-spacing: 4;" GridPane.rowIndex="2">
+            <HBox alignment="CENTER" prefHeight="88.0" prefWidth="232.0" style="-fx-spacing: 4;" GridPane.rowIndex="2">
                <children>
                   <PasswordField fx:id="passWord" prefHeight="25.0" prefWidth="160.0" promptText="Password" />
                </children>
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-spacing: 48;" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
+                  <Button mnemonicParsing="false" onAction="#OpenGenerateWindow" text="Genearate&#10;Password&#10;" />
                   <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAdd" text="Add" />
                   <Button mnemonicParsing="false" onAction="#onCancel" text="Cancel" />
                </children>

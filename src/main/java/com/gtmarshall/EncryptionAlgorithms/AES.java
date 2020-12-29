@@ -21,7 +21,6 @@ public class AES extends EncryptionAlgorithm {
       return Base64.getEncoder()
           .encodeToString(cipher.doFinal(plaintext.getBytes(StandardCharsets.UTF_8)));
     } catch (Exception e) {
-      System.out.println("Error while encrypting: " + e.toString());
     }
     return null;
   }
@@ -32,7 +31,6 @@ public class AES extends EncryptionAlgorithm {
       Cipher cipher = genCipher(key, Cipher.DECRYPT_MODE);
       return new String(cipher.doFinal(Base64.getDecoder().decode(ciphertext)));
     } catch (Exception e) {
-      System.out.println("Error while decrypting: " + e.toString());
     }
     return null;
   }

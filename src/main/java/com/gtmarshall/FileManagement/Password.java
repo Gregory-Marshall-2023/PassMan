@@ -52,13 +52,13 @@ public class Password {
   }
 
   public void togglePass() {
-    if (passString.visible.get()) passString.Hide();
-    else passString.Show();
+    if (passString.visible.get()) passString.hide();
+    else passString.show();
   }
 
   public void toggleDesc() {
-    if (description.visible.get()) description.Hide();
-    else description.Show();
+    if (description.visible.get()) description.hide();
+    else description.show();
   }
 
   public void unbindAppName(Label label) {
@@ -70,15 +70,19 @@ public class Password {
   }
 
   public void unbindPassword(TextInputControl control) {
-    passString.Hide();
+    passString.hide();
     passString.stringProperty.unbindBidirectional(control.textProperty());
     control.editableProperty().unbind();
   }
 
   public void unbindDescription(TextInputControl control) {
-    description.Hide();
+    description.hide();
     description.stringProperty.unbindBidirectional(control.textProperty());
     control.editableProperty().unbind();
+  }
+
+  public void setPassword(String text) {
+    passString.set(text);
   }
 
   public class HiddenString {
@@ -95,15 +99,15 @@ public class Password {
             if (visible.get()) actualString = stringProperty.getValue();
           });
       visible = new SimpleBooleanProperty(false);
-      Hide();
+      hide();
     }
 
-    public void Show() {
+    public void show() {
       stringProperty.setValue(actualString);
       visible.set(true);
     }
 
-    public void Hide() {
+    public void hide() {
       visible.set(false);
       Random r = new Random();
       r.setSeed(System.currentTimeMillis());
@@ -114,6 +118,12 @@ public class Password {
     public void bind(TextInputControl field) {
       field.textProperty().bindBidirectional(stringProperty);
       field.editableProperty().bind(visible);
+    }
+
+    protected void set(String str) {
+      actualString = str;
+      if (visible.get()) stringProperty.set(actualString);
+      else hide();
     }
 
     protected String get() {

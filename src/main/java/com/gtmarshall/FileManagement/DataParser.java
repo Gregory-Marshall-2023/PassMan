@@ -18,10 +18,8 @@ public class DataParser {
       InputStream in = new FileInputStream(f);
       BufferedReader reader = new BufferedReader(new InputStreamReader(in));
       while (reader.ready()) str.append(reader.readLine());
-      System.out.println("Data Loaded");
       reader.close();
     } catch (Exception e) {
-      System.out.println("Load Failed");
       e.printStackTrace();
     }
     return str.toString();

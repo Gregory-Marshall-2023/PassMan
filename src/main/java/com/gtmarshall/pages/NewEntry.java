@@ -14,6 +14,7 @@ public class NewEntry extends Popup {
   Viewer parent;
   @FXML TextInputControl appName, userName, passWord, description;
   @FXML AnchorPane root;
+  Password p;
 
   public NewEntry(Viewer viewer) {
     parent = viewer;
@@ -26,6 +27,9 @@ public class NewEntry extends Popup {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    p = new Password("", "", "", "");
+    p.bindPassString(passWord);
+    p.togglePass();
     ChangeListener listener =
         new ChangeListener() {
           @Override
@@ -35,6 +39,11 @@ public class NewEntry extends Popup {
           }
         };
     appName.focusedProperty().addListener(listener);
+  }
+
+  @FXML
+  void OpenGenerateWindow(ActionEvent event) {
+    PageManager.getInstance().showPopup(new PasswordGen(p));
   }
 
   @FXML

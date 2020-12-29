@@ -19,7 +19,6 @@ public class DataSaver {
       writer.write(str.toString());
       writer.flush();
       writer.close();
-      System.out.println("Data Saved");
     } catch (Exception e) {
       e.printStackTrace();
     }

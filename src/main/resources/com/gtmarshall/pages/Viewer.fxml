@@ -127,6 +127,7 @@
                                     </ImageView>
                                  </children>
                               </StackPane>
+                              <Button mnemonicParsing="false" onAction="#OpenGenerateWindow" text="Generate" />
                            </children>
                            <padding>
                               <Insets bottom="8.0" top="2.0" />

@@ -26,7 +26,6 @@ public abstract class EncryptionAlgorithm {
 
   public static void setUser(User user) {
     if (selected == null) return;
-    System.out.println("User Selected");
     selected.user = user;
     if (user != null) selected.setSalt(user.getSalt());
   }
@@ -36,7 +35,6 @@ public abstract class EncryptionAlgorithm {
   }
 
   public final void select() {
-    System.out.println("Algorithm Selected");
     EncryptionAlgorithm.selected = this;
   }
 }
