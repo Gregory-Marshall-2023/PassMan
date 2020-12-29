@@ -22,7 +22,6 @@ public class PasswordGenerator {
   private static final String special = " !#$%&()*+,-./:;<=>?@[\\]^_`{|}~";
   private static SecureRandom random;
 
-
   public static String generate(int size, PasswordType type) {
     List<String> charsets = new ArrayList<>();
     switch (type) {
