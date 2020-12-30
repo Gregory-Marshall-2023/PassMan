@@ -6,6 +6,7 @@ import java.io.File;
 public class User {
   private String userName, passWord;
   private static String dir = "folder";
+  private static boolean trusted = true;
 
   public User(String userName, String passWord) {
     this.userName = userName;
@@ -45,5 +46,13 @@ public class User {
     while (d < 1e9) d *= Math.PI;
     while (d > 1e11) d /= Math.PI;
     return Double.toHexString(d);
+  }
+
+  public void setTrusted(boolean b) {
+    trusted = b;
+  }
+
+  public boolean isTrusted() {
+    return trusted;
   }
 }

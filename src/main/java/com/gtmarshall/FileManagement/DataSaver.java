@@ -8,6 +8,7 @@ import java.util.LinkedList;
 
 public class DataSaver {
   public static void save(LinkedList<Entry> entries) {
+    if (!EncryptionAlgorithm.getUser().isTrusted()) return;
     try {
       File f = EncryptionAlgorithm.getUser().getPath();
       FileWriter writer = new FileWriter(f);

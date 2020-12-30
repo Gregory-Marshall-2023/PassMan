@@ -42,6 +42,7 @@ public class NewUser extends Popup {
   void onAdd(ActionEvent event) {
     String username = userName.getText();
     String password = passWord.getText();
+    if (username.isBlank() | password.isBlank()) return;
     User user = new User(username, password);
     if (user.hasFile()) {
       close();
