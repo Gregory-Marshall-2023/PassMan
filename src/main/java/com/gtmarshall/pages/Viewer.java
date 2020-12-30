@@ -162,8 +162,8 @@ public class Viewer extends Page {
 
   @FXML
   void OpenGenerateWindow(ActionEvent event) {
-    if(selected!=null)
-    PageManager.getInstance().showPopup(new PasswordGen(selected.getPassword()));
+    if (selected != null)
+      PageManager.getInstance().showPopup(new PasswordGen(selected.getPassword()));
   }
 
   @FXML

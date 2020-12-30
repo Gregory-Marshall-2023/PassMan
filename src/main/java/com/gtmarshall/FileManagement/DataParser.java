@@ -20,7 +20,7 @@ public class DataParser {
       while (reader.ready()) str.append(reader.readLine());
       reader.close();
     } catch (Exception e) {
-      e.printStackTrace();
+
     }
     return str.toString();
   }
@@ -29,7 +29,10 @@ public class DataParser {
     String str = load();
     if (str.equals("")) return "".lines();
     str = EncryptionAlgorithm.decrypt(str);
-    if (str == null) return null;
+    if (str == null) {
+      EncryptionAlgorithm.getUser().setTrusted(false);
+      return null;
+    }
     Optional<String> first = str.lines().findFirst();
     String headLine;
     if (first.isPresent()) headLine = first.get();

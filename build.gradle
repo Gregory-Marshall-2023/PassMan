@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'edu.wpi.gtmarshall'
-version 'a.0.1'
+version 'V1.0'
 
 sourceCompatibility = '13'
 targetCompatibility = '13'
